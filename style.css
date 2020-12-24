@@ -1,0 +1,12 @@
+@import url(./vendor/modern-reset.css);
+@import url(./blocks/add-button/add-button.css);
+@import url(./blocks/card-grid/card-grid.css);
+@import url(./blocks/card/card.css);
+@import url(./blocks/footer/footer.css);
+@import url(./blocks/header/header.css);
+@import url(./blocks/info/info.css);
+@import url(./blocks/main/main.css);
+@import url(./blocks/profile/profile.css);
+@import url(./blocks/root/root.css);
+@import url(./blocks/wrapper/wrapper.css);
+
