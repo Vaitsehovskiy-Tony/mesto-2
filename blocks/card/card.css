@@ -3,3 +3,9 @@
 @import url(./__like-icon/card__like-icon.css);
 @import url(./__place/card__place.css);
 
+.card {
+    border-radius: 10px;
+    background-color: #fff;
+    width: 282px;
+    height: 361px;
+}

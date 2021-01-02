@@ -1,4 +1,5 @@
 @import url(./vendor/modern-reset.css);
+@import url(./vendor/fonts.css);
 @import url(./blocks/add-button/add-button.css);
 @import url(./blocks/card-grid/card-grid.css);
 @import url(./blocks/card/card.css);

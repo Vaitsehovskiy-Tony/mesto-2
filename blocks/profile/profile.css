@@ -1,1 +1,15 @@
-@import url(./__info/profile__info.css);
+.profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 40px 0 0;
+}
+
+@media screen and (max-width: 800px) {
+    .profile {
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 40px auto 0;
+    }
+    
+}
