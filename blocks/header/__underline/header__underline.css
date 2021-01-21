@@ -2,8 +2,9 @@
     margin: 45px auto 0;
 }
 
-@media screen and (max-width: 590px) {
+@media screen and (max-width: 750px) {
     .header__underline {
-        display: none;
+        margin: 31px auto 0;
+        color: #545454;
     }
 }

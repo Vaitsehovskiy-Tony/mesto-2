@@ -11,3 +11,9 @@
     grid-area: job;
 
 }
+
+@media screen and (max-width: 750px) {
+    .info__job  {
+        margin: 14px auto 0;
+    }
+}

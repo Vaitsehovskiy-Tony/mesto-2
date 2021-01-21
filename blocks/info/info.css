@@ -17,8 +17,16 @@
     margin: 0 0 0 8px;
 }
 
-@media screen and (max-width: 800px) {
-    .info {
 
+@media screen and (max-width: 750px) {
+    .info {
+        grid-template-areas: 
+        '. avatar avatar .'
+        '. name edit-bttn .'
+        '. job job .'
+        '. add-bttn add-bttn .';
+        grid-template-columns: 1fr repeat(2, min-content) 1fr;
+        grid-template-rows: repeat(4, min-content);
+        justify-content: center;
     }
 }

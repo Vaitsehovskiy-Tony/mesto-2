@@ -12,3 +12,10 @@
     grid-area: name;
 
 }
+
+
+@media screen and (max-width: 750px) {
+    .info__name  {
+        margin: 26px auto 0;
+    }
+}

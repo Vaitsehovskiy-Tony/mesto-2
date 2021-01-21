@@ -4,3 +4,9 @@
     height: 24px;
     margin: 0 0 0 18px;
 }
+
+@media screen and (max-width: 750px) {
+    .info__edit-button {
+        margin: 34px 0 0 18px;
+    }
+}
