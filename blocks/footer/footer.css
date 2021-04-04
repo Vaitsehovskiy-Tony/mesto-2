@@ -1,2 +1,6 @@
 @import url(./__copyright/footer__copyright.css);
 
+.footer {
+    margin: 68px auto 60px;
+    width: 100%;
+}

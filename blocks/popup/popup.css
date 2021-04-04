@@ -1,0 +1,14 @@
+@import url(./__close-button/popup__close-button.css);
+@import url(./__close-button-img/popup__close-button-img.svg);
+@import url(./__field/popup__field.css);
+@import url(./__container/popup__container.css);
+@import url(./_closed/popup_closed.css);
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .8);
+}

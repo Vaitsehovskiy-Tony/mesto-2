@@ -1,0 +1,23 @@
+.popup__field {
+
+    padding: 0;
+    margin: 0;
+    border: 0 none;
+    display: block;
+
+    width: 100%;
+    height: 27px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+}
+
+.popup__field::placeholder {
+    color: #000000;
+    opacity: 1;
+}

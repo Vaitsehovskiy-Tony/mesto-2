@@ -10,7 +10,7 @@
     grid-template-areas: 
     'avatar name edit-bttn add-bttn'
     'avatar job - -';
-    grid-template-columns: 120px min-content 42px 1fr;
+    grid-template-columns: 120px min-content 42px minmax(150px, 1fr);
     grid-template-rows: repeat(2, 1fr);
     justify-content: space-between;
     width: 100%;
@@ -20,6 +20,7 @@
 
 @media screen and (max-width: 750px) {
     .info {
+        margin: 0;
         grid-template-areas: 
         '. avatar avatar .'
         '. name edit-bttn .'

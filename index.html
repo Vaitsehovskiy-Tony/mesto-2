@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" sizes="16x16"
-    href="./images/favicon.ico">
+    href="./images/favicon2.ico">
     <link rel="stylesheet" href="./style.css">
     <title>New Mesto</title>
 </head>
@@ -75,6 +75,19 @@
             </footer>
         </div>
     </div>
-    
+
+    <section class="popup popup_closed">
+        <div class="popup__container">
+            <button type="button" class="popup__close-button"><img src="./images/Close Icon.svg" alt="" class="popup__close-button-img">
+            </button>
+            <form action="" class="info-edit" name="user">        
+                <h3 class="info-edit__header">Редактировать профиль</h3>
+                <input type="text" name='name' placeholder="Жак-Ив Кусто" class="popup__field info-edit__name">
+                <input type="text" name='job' placeholder="Исследователь океана" class="popup__field info-edit__job">
+                <button type="submit" class="info-edit__submit">Сохранить</button>
+            </form>
+        </div>
+    </section>
+    <script src="./index.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
     grid-area: edit-bttn;
     width: 24px;
     height: 24px;
-    margin: 0 0 0 18px;
+    margin: 15px 0 0 18px;
 }
 
 @media screen and (max-width: 750px) {
