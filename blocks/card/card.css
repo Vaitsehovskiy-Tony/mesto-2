@@ -2,6 +2,7 @@
 @import url(./__info/card__info.css);
 @import url(./__like-icon/card__like-icon.css);
 @import url(./__place/card__place.css);
+@import url(./__bin-icon/card__bin-icon.css);
 
 .card {
     border-radius: 10px;

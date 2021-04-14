@@ -3,10 +3,17 @@
     height: 40px;
     display: block;
     position: absolute;
-    top: -40px;
-    right: -10px;
+    top: -35px;
+    right: -35px;
     background: none;
     border: none; 
     outline: none;
     padding: 0;
+}
+
+@media screen and (max-width: 510px) {
+    .popup__close-button {
+        top: -40px;
+        right: -10px;
+    }
 }

@@ -10,7 +10,7 @@
     grid-template-areas: 
     'avatar name edit-bttn add-bttn'
     'avatar job - -';
-    grid-template-columns: 120px min-content 42px minmax(150px, 1fr);
+    grid-template-columns: 120px fit-content(56%) 42px minmax(150px, 1fr);
     grid-template-rows: repeat(2, 1fr);
     justify-content: space-between;
     width: 100%;

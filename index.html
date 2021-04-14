@@ -26,48 +26,16 @@
                     </div>
                 </section>
                 <section class="card-grid">
-                    <div class="card">
-                        <img src="./images/kirill-pershin-1556355-unsplash.png" alt="pic" class="card__img">
-                        <div class="card__info">
-                            <h4 class="card__place">Карачаевск</h4>
-                            <img src="./images/Group.svg" alt="like-icon" class="card__like-icon">
+                    <template id="cardTemplate">
+                        <div class="card">
+                            <img alt="pic" class="card__img">
+                            <img src="./images/bin-icon.svg" alt="" class="card__bin-icon">
+                            <div class="card__info">
+                                <h4 class="card__place"></h4>
+                                <img src="./images/like-icon.svg" alt="like-icon" class="card__like-icon">
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <img src="./images/kirill-pershin-1088404-unsplash.png" alt="pic" class="card__img">
-                        <div class="card__info">
-                            <h4 class="card__place">Гора Эльбрус</h4>
-                            <img src="./images/Group.svg" alt="like-icon" class="card__like-icon">
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="./images/kirill-pershin-1404681-unsplash(1).png" alt="pic" class="card__img">
-                        <div class="card__info">
-                            <h4 class="card__place">Домбай</h4>
-                            <img src="./images/Group.svg" alt="like-icon" class="card__like-icon">
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="./images/kirill-pershin-1404681-unsplash.png" alt="pic" class="card__img">
-                        <div class="card__info">
-                            <h4 class="card__place">Гора Эльбрус</h4>
-                            <img src="./images/Group.svg" alt="" class="card__like-icon">
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="./images/kirill-pershin-1556355-unsplash(1).png" alt="pic" class="card__img">
-                        <div class="card__info">
-                            <h4 class="card__place">Карачаевск</h4>
-                            <img src="./images/Group.svg" alt="like-icon" class="card__like-icon">
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="./images/kirill-pershin-1556355-unsplash.png" alt="pic" class="card__img">
-                        <div class="card__info">
-                            <h4 class="card__place">Домбай</h4>
-                            <img src="./images/Group.svg" alt="like-icon" class="card__like-icon">
-                        </div>
-                    </div>
+                    </template>
                 </section>
             </main>
             <footer class="footer">
@@ -75,17 +43,24 @@
             </footer>
         </div>
     </div>
-
-    <section class="popup popup_closed">
+    <section class="popup popup_closed ">
         <div class="popup__container">
             <button type="button" class="popup__close-button"><img src="./images/Close Icon.svg" alt="" class="popup__close-button-img">
             </button>
-            <form action="" class="info-edit" name="user">        
-                <h3 class="info-edit__header">Редактировать профиль</h3>
-                <input type="text" name='name' placeholder="Жак-Ив Кусто" class="popup__field info-edit__name">
-                <input type="text" name='job' placeholder="Исследователь океана" class="popup__field info-edit__job">
+            <form action="" class="info-edit" name="form">        
+                <h3 class="info-edit__header"></h3>
+                <input type="text" name='field1' placeholder="" class="popup__field info-edit__name">
+                <input type="text" name='field2' placeholder="" class="popup__field info-edit__job">
                 <button type="submit" class="info-edit__submit">Сохранить</button>
             </form>
+        </div>
+    </section>
+
+    <section class="focus popup_closed">
+        <div class="focus__container">
+            <buttton class="focus__close-bttn"><img src="./images/Close Icon.svg" alt="" class="popup__close-button-img"></buttton>
+            <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="" class="focus__img">
+            <h4 class="focus__info">Задаём тегу a атрибут href</h4>
         </div>
     </section>
     <script src="./index.js"></script>
