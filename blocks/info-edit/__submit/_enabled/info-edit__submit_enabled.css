@@ -1,0 +1,10 @@
+.info-edit__submit.info-edit__submit_enabled{
+    border: 0 none;
+    background-color: #000;
+    color: #fff;
+}
+
+.info-edit__submit.info-edit__submit_enabled:hover {
+    opacity: 0.5 ;
+    transition-duration: 0.5s;
+}

@@ -43,19 +43,34 @@
             </footer>
         </div>
     </div>
-    <section class="popup popup_closed ">
+    <section class="popup popup-user popup_closed ">
         <div class="popup__container">
             <button type="button" class="popup__close-button"><img src="./images/Close Icon.svg" alt="" class="popup__close-button-img">
             </button>
-            <form action="" class="info-edit" name="form">        
-                <h3 class="info-edit__header"></h3>
-                <input type="text" name='field1' placeholder="" class="popup__field info-edit__name">
-                <input type="text" name='field2' placeholder="" class="popup__field info-edit__job">
+            <form action="" class="info-edit" name="userData">        
+                <h3 class="info-edit__header">Редактировать профиль</h3>
+                <input type="text" name='name' placeholder="" id='name' class="popup__field info-edit__name "  minlength="2" maxlength="40" novalidate required>
+                <span class="popup__field-error name-error">непредвиденная ошибка!!!</span>
+                <input type="text" name='job' placeholder="" id='job' class="popup__field info-edit__job"  minlength="2" maxlength="200" novalidate required>
+                <span class="popup__field-error job-error">непредвиденная ошибка!!!</span>
                 <button type="submit" class="info-edit__submit">Сохранить</button>
             </form>
         </div>
     </section>
-
+    <section class="popup popup-card popup_closed ">
+        <div class="popup__container">
+            <button type="button" class="popup__close-button"><img src="./images/Close Icon.svg" alt="" class="popup__close-button-img">
+            </button>
+            <form action="" class="info-edit" name="newCard">        
+                <h3 class="info-edit__header">Новое место</h3>
+                <input type="text" name='name' placeholder="Название" id='placeName' class="popup__field info-edit__name "  minlength="2" maxlength="30" novalidate required>
+                <span class="popup__field-error placeName-error">непредвиденная ошибка!!!</span>
+                <input type="url" name='link' placeholder="Ссылка на картинку" id='link' class="popup__field info-edit__job"  novalidate required>
+                <span class="popup__field-error link-error">непредвиденная ошибка!!!</span>
+                <button type="submit" class="info-edit__submit">Сохранить</button>
+            </form>
+        </div>
+    </section>
     <section class="focus popup_closed">
         <div class="focus__container">
             <buttton class="focus__close-bttn"><img src="./images/Close Icon.svg" alt="" class="popup__close-button-img"></buttton>
@@ -63,6 +78,8 @@
             <h4 class="focus__info">З</h4>
         </div>
     </section>
-    <script src="./index.js"></script>
+    <script src="./script/utils.js"></script>
+    <script src="./script/validate.js"></script>
+    <script src="./script/index.js"></script>
 </body>
 </html>

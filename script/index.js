@@ -1,7 +1,10 @@
-const popup = document.querySelector('.popup');
+const popupUser = document.querySelector('.popup-user');
+const popupCard = document.querySelector('.popup-card');
 const editButton = document.querySelector('.info__edit-button');
-const closeButton = document.querySelector('.popup__close-button');
-const userForm = document.forms.form;
+const closeUserButton = document.querySelector('.popup-user .popup__close-button');
+const closeCardButton = document.querySelector('.popup-card .popup__close-button');
+const userForm = document.forms.userData;
+const cardForm = document.forms.newCard;
 const addButton = document.querySelector('.add-button');
 const cardGrid = document.querySelector('.card-grid');
 const submitButton = document.querySelector('.info-edit__submit');
@@ -10,40 +13,41 @@ const userJob = document.querySelector('.info__job');
 const popupHeader = document.querySelector('.info-edit__header');
 const focusBlock = document.querySelector('.focus');
 const focusClose = focusBlock.querySelector('.focus__close-bttn');
-const firstInput = userForm.field1;
-const secondInput = userForm.field2;
+const nameInput = userForm.name;
+const jobInput = userForm.job;
+const placeNameInput = cardForm.placeName;
+const urlInput = cardForm.link;
 
-
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
 
 function formToggleClass (obj) {
     obj.classList.toggle('popup_closed');
 };
+
+function escHandler (popup) {
+  document.addEventListener('keydown', (evt) => {
+    if(evt.key === 'Escape') {
+      popup.classList.add('popup_closed');
+    }
+  }) 
+}
+
+function overlayFormHandler (popup) {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget) {
+      popup.classList.add('popup_closed');
+    } 
+  })
+}
+
+function overlayFocusHandler (popup) {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target !== document.querySelector('.focus__img')) {
+      popup.classList.add('popup_closed');
+    } 
+  })
+}
+
+
 
 function makeCard (name, link) {
     const cardTemplate = document.querySelector('#cardTemplate').content;
@@ -51,7 +55,7 @@ function makeCard (name, link) {
 
     newCard.querySelector('.card__img').src = link;
     newCard.querySelector('.card__place').textContent = name;
-    if(popup.classList.contains('popup_closed')){
+    if(popupCard.classList.contains('popup_closed')){
       cardGrid.append(newCard);
     } else {
       cardGrid.prepend(newCard);
@@ -65,36 +69,35 @@ function cardRender (arr) {
 };
 
 function formUserOpenHandler () {
-    formToggleClass(popup);
-    popupHeader.textContent = 'Редактировать профиль'
-    firstInput.value = userName.textContent;
-    secondInput.value = userJob.textContent;
+  formToggleClass(popupUser);
+  escHandler(popupUser);
+  overlayFormHandler(popupUser);
+
+  nameInput.value = userName.textContent;
+  jobInput.value = userJob.textContent;
 };
 
 function formPlaceOpenHandler () {
-    formToggleClass(popup);
-    popupHeader.textContent = 'Новое место';
-    firstInput.value = '';
-    secondInput.value = '';
-    firstInput.placeholder = 'Название';
-    secondInput.placeholder = 'Ссылка на картинку';
+  formToggleClass(popupCard);
+  escHandler(popupCard);
+  overlayFormHandler(popupCard);
+
+  placeNameInput.value = '';
+  urlInput.value = '';
 }
 
-function formSubmitHandler (evt) {
+function formUserSubmitHandler (evt) {
     evt.preventDefault();
-    if(popupHeader.textContent === 'Редактировать профиль'){
-      userName.textContent = firstInput.value;
-      userJob.textContent = secondInput.value;
-      formToggleClass(popup);
-    } else if (popupHeader.textContent === 'Новое место') {
-      makeCard(secondInput.value, firstInput.value);
-      formToggleClass(popup);
-    }
-};
+      userName.textContent = nameInput.value;
+      userJob.textContent = jobInput.value;
+      formToggleClass(popupUser);
+}
 
-function formCloseHandler() {
-    formToggleClass(popup);
-};
+function formCardSubmitHandler (evt) {
+  evt.preventDefault();
+  makeCard(placeNameInput.value, urlInput.value);
+  formToggleClass(popupCard);
+}
 
 function imgFocusHandler(evt) {
   const focusImg = focusBlock.querySelector('.focus__img');
@@ -104,6 +107,8 @@ function imgFocusHandler(evt) {
     focusBlock.classList.remove('popup_closed');
     focusImg.src = evt.target.src;
     focusSubtitle.textContent  = evt.target.parentNode.querySelector('.card__place').textContent;
+    escHandler(focusBlock);
+    overlayFocusHandler(focusBlock);
   }
 }
 
@@ -134,13 +139,21 @@ function cardLikeHandler(evt) {
   }
 }
 
+
 cardRender(initialCards);
 editButton.addEventListener('click', formUserOpenHandler);
-closeButton.addEventListener('click', formCloseHandler); 
-userForm.addEventListener('submit', formSubmitHandler); 
+closeUserButton.addEventListener('click', () => {
+  formToggleClass(popupUser); 
+});
+
+
+closeCardButton.addEventListener('click', () => {
+  formToggleClass(popupCard)
+}); 
+userForm.addEventListener('submit', formUserSubmitHandler); 
 addButton.addEventListener('click', formPlaceOpenHandler);
 cardGrid.addEventListener('click', imgFocusHandler);
 focusClose.addEventListener('click', imgCloseHandler);
 cardGrid.addEventListener('click', cardLikeHandler);
-userForm.addEventListener('submit', formSubmitHandler); 
+cardForm.addEventListener('submit', formCardSubmitHandler); 
 cardGrid.addEventListener('click', cardDeleteHandler); 

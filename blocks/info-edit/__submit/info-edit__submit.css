@@ -1,12 +1,17 @@
+@import url(./_enabled/info-edit__submit_enabled.css);
+
 .info-edit__submit {
     display: block;
+    position: absolute;
+    bottom: 0;
     margin: 48px 0 37px 0;
-    width: 100%;
+    width: 83%;
     height: 50px;
-    border:0 none;
 
-    background-color: #000;
-    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    background-color: #fff;
+    color: rgba(0, 0, 0, .3);
+    border-radius: 2px;
 
     font-family: 'Inter';
     font-style: normal;
@@ -14,10 +19,10 @@
     font-size: 18px;
     line-height: 22px;
     text-align: center;
-    color: #fff;
 }
 
-.info-edit__submit:hover {
-    opacity: 0.5 ;
-    transition-duration: 0.5s;
+@media screen and (max-width: 415px) {
+    .info-edit__submit {
+        width: 70%;
+    }
 }

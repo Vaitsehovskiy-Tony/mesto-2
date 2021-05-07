@@ -10,12 +10,15 @@
     height: 27px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
 
+.popup__field:focus {
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .popup__field::placeholder {

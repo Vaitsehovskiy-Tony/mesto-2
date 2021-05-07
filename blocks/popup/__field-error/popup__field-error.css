@@ -1,0 +1,13 @@
+.popup__field-error {
+    margin-top: -1px;
+    margin-bottom: -25px;
+    display: block;
+    font-family: inherit;
+    font-size: 12px;
+    line-height: inherit;
+    color: #ff0000;
+    border-top: 1px solid #ff0000;
+
+    display: none;
+
+}
