@@ -1,3 +1,7 @@
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+import initialCards from './utils.js';
+
 const popupUser = document.querySelector('.popup-user');
 const popupCard = document.querySelector('.popup-card');
 const editButton = document.querySelector('.info__edit-button');
@@ -15,8 +19,22 @@ const focusBlock = document.querySelector('.focus');
 const focusClose = focusBlock.querySelector('.focus__close-bttn');
 const nameInput = userForm.name;
 const jobInput = userForm.job;
-const placeNameInput = cardForm.placeName;
-const urlInput = cardForm.link;
+
+const cardTemplate = '#cardTemplate';
+
+const formSelectors = {
+  formElement: '.info-edit',
+  inputElement: '.popup__field',
+  errorElement: '.popup__field-error',
+  errorEnabled: 'popup__field-error_show-error',
+  submitButton: '.info-edit__submit',
+}
+
+const formValidatorUser = new FormValidator(popupUser, formSelectors);
+const formValidatorCard = new FormValidator(popupCard, formSelectors);
+
+formValidatorUser.enableValidation();
+formValidatorCard.enableValidation();
 
 
 function formToggleClass (obj) {
@@ -43,28 +61,16 @@ function overlayFocusHandler (popup) {
   popup.addEventListener('click', (evt) => {
     if (evt.target !== document.querySelector('.focus__img')) {
       popup.classList.add('popup_closed');
+      // popup.li;
+
     } 
   })
 }
 
-
-
-function makeCard (name, link) {
-    const cardTemplate = document.querySelector('#cardTemplate').content;
-    const newCard = cardTemplate.cloneNode(true);       
-
-    newCard.querySelector('.card__img').src = link;
-    newCard.querySelector('.card__place').textContent = name;
-    if(popupCard.classList.contains('popup_closed')){
-      cardGrid.append(newCard);
-    } else {
-      cardGrid.prepend(newCard);
-    };
-}
-
 function cardRender (arr) {
     arr.forEach((item) => {
-        makeCard(item.name, item.link);
+        const card = new Card(item, cardTemplate);
+        card.makeCard();
     });
 };
 
@@ -81,9 +87,8 @@ function formPlaceOpenHandler () {
   formToggleClass(popupCard);
   escHandler(popupCard);
   overlayFormHandler(popupCard);
-
-  placeNameInput.value = '';
-  urlInput.value = '';
+  cardForm.placeName.value = '';
+  cardForm.link.value = '';
 }
 
 function formUserSubmitHandler (evt) {
@@ -95,7 +100,12 @@ function formUserSubmitHandler (evt) {
 
 function formCardSubmitHandler (evt) {
   evt.preventDefault();
-  makeCard(placeNameInput.value, urlInput.value);
+  const placeInput = {
+    name: cardForm.placeName.value,
+    link: cardForm.link.value,
+  }
+  const card = new Card(placeInput, cardTemplate);
+  card.makeCard();
   formToggleClass(popupCard);
 }
 
@@ -109,17 +119,18 @@ function imgFocusHandler(evt) {
     focusSubtitle.textContent  = evt.target.parentNode.querySelector('.card__place').textContent;
     escHandler(focusBlock);
     overlayFocusHandler(focusBlock);
+    focusClose.addEventListener('click', imgCloseHandler);
   }
 }
 
 function imgCloseHandler() {
   focusBlock.classList.add('popup_closed');
+  focusBlock.removeEventListener('click', imgCloseHandler);
 }
 
 function cardDeleteHandler(evt) {
   if(evt.target.classList.contains('card__bin-icon')){
     evt.target.parentNode.remove();
-    console.log('пытаюсь удалить');
   }
 }
 
@@ -153,7 +164,6 @@ closeCardButton.addEventListener('click', () => {
 userForm.addEventListener('submit', formUserSubmitHandler); 
 addButton.addEventListener('click', formPlaceOpenHandler);
 cardGrid.addEventListener('click', imgFocusHandler);
-focusClose.addEventListener('click', imgCloseHandler);
 cardGrid.addEventListener('click', cardLikeHandler);
 cardForm.addEventListener('submit', formCardSubmitHandler); 
 cardGrid.addEventListener('click', cardDeleteHandler); 
