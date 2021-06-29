@@ -1,6 +1,8 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import initialCards from './utils.js';
+import Section from './Section.js';
+import Popup from './Popup.js';
 
 const popupUser = document.querySelector('.popup-user');
 const popupCard = document.querySelector('.popup-card');
@@ -19,8 +21,8 @@ const focusBlock = document.querySelector('.focus');
 const focusClose = focusBlock.querySelector('.focus__close-bttn');
 const nameInput = userForm.name;
 const jobInput = userForm.job;
-
 const cardTemplate = '#cardTemplate';
+const gridSection = '.card-grid';
 
 const formSelectors = {
   formElement: '.info-edit',
@@ -61,18 +63,22 @@ function overlayFocusHandler (popup) {
   popup.addEventListener('click', (evt) => {
     if (evt.target !== document.querySelector('.focus__img')) {
       popup.classList.add('popup_closed');
-      // popup.li;
-
     } 
   })
 }
 
-function cardRender (arr) {
-    arr.forEach((item) => {
-        const card = new Card(item, cardTemplate);
-        card.makeCard();
-    });
-};
+const cardList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, cardTemplate);
+      const newCard = card.makeCard();
+      cardList.addItem(newCard)
+    }
+  },
+  gridSection,
+)
+
+cardList.generateCards();
 
 function formUserOpenHandler () {
   formToggleClass(popupUser);
@@ -106,8 +112,23 @@ function formCardSubmitHandler (evt) {
   }
   const card = new Card(placeInput, cardTemplate);
   card.makeCard();
+  
   formToggleClass(popupCard);
 }
+
+
+// const cardList = new Section({
+//   items: initialCards,
+//   renderer: (item) => {
+//     const card = new Card(item, cardTemplate);
+//     const newCard = card.makeCard();
+//     cardList.addItem(newCard)
+//   }
+// },
+// gridSection,
+// )
+
+// cardList.generateCards();
 
 function imgFocusHandler(evt) {
   const focusImg = focusBlock.querySelector('.focus__img');
@@ -151,7 +172,6 @@ function cardLikeHandler(evt) {
 }
 
 
-cardRender(initialCards);
 editButton.addEventListener('click', formUserOpenHandler);
 closeUserButton.addEventListener('click', () => {
   formToggleClass(popupUser); 
