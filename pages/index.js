@@ -1,8 +1,11 @@
-import FormValidator from './FormValidator.js';
-import Card from './Card.js';
-import initialCards from './utils.js';
-import Section from './Section.js';
-import Popup from './Popup.js';
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import initialCards from '../utils/constants.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+
+
 
 const popupUser = document.querySelector('.popup-user');
 const popupCard = document.querySelector('.popup-card');
@@ -39,18 +42,6 @@ formValidatorUser.enableValidation();
 formValidatorCard.enableValidation();
 
 
-function formToggleClass (obj) {
-    obj.classList.toggle('popup_closed');
-};
-
-function escHandler (popup) {
-  document.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
-      popup.classList.add('popup_closed');
-    }
-  }) 
-}
-
 function overlayFormHandler (popup) {
   popup.addEventListener('click', (evt) => {
     if (evt.target === evt.currentTarget) {
@@ -59,13 +50,13 @@ function overlayFormHandler (popup) {
   })
 }
 
-function overlayFocusHandler (popup) {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target !== document.querySelector('.focus__img')) {
-      popup.classList.add('popup_closed');
-    } 
-  })
-}
+// function overlayFocusHandler (popup) {
+//   popup.addEventListener('click', (evt) => {
+//     if (evt.target !== document.querySelector('.focus__img')) {
+//       popup.classList.add('popup_closed');
+//     } 
+//   })
+// }
 
 const cardList = new Section({
     items: initialCards,
@@ -76,9 +67,28 @@ const cardList = new Section({
     }
   },
   gridSection,
-)
+)   
 
 cardList.generateCards();
+
+const placePopup = new PopupWithForm({
+  popupSelector:'.popup-card',
+  callback: () => {
+    const card = new Card(placePopup._getInputValues(), cardTemplate);
+    cardList.addItem(card.makeCard());
+    placePopup.close();
+  }
+});
+
+const userPopup = new PopupWithForm({
+  popupSelector:'.popup-user',
+  callback: () => {
+    // const card = new Card(placePopup._getInputValues(), cardTemplate);
+    // cardList.addItem(card.makeCard());
+    // placePopup.close();
+  }
+});
+
 
 function formUserOpenHandler () {
   formToggleClass(popupUser);
@@ -86,16 +96,9 @@ function formUserOpenHandler () {
   overlayFormHandler(popupUser);
 
   nameInput.value = userName.textContent;
-  jobInput.value = userJob.textContent;
+  jobInput.value =  userJob.textContent;
 };
 
-function formPlaceOpenHandler () {
-  formToggleClass(popupCard);
-  escHandler(popupCard);
-  overlayFormHandler(popupCard);
-  cardForm.placeName.value = '';
-  cardForm.link.value = '';
-}
 
 function formUserSubmitHandler (evt) {
     evt.preventDefault();
@@ -104,43 +107,21 @@ function formUserSubmitHandler (evt) {
       formToggleClass(popupUser);
 }
 
-function formCardSubmitHandler (evt) {
-  evt.preventDefault();
-  const placeInput = {
-    name: cardForm.placeName.value,
-    link: cardForm.link.value,
-  }
-  const card = new Card(placeInput, cardTemplate);
-  card.makeCard();
-  
-  formToggleClass(popupCard);
-}
 
-
-// const cardList = new Section({
-//   items: initialCards,
-//   renderer: (item) => {
-//     const card = new Card(item, cardTemplate);
-//     const newCard = card.makeCard();
-//     cardList.addItem(newCard)
-//   }
-// },
-// gridSection,
-// )
-
-// cardList.generateCards();
 
 function imgFocusHandler(evt) {
-  const focusImg = focusBlock.querySelector('.focus__img');
-  const focusSubtitle = focusBlock.querySelector('.focus__info');
+  // const focusImg = focusBlock.querySelector('.focus__img');
+  // const focusSubtitle = focusBlock.querySelector('.focus__info');
   
   if (evt.target.classList.contains('card__img')) {
-    focusBlock.classList.remove('popup_closed');
-    focusImg.src = evt.target.src;
-    focusSubtitle.textContent  = evt.target.parentNode.querySelector('.card__place').textContent;
-    escHandler(focusBlock);
-    overlayFocusHandler(focusBlock);
-    focusClose.addEventListener('click', imgCloseHandler);
+    // focusBlock.classList.remove('popup_closed');
+    const focusElement = new PopupWithImage({popupSelector:'.focus'});
+    focusElement.open(evt);
+    // focusImg.src = evt.target.src;
+    // focusSubtitle.textContent  = evt.target.parentNode.querySelector('.card__place').textContent;
+    // escHandler(focusBlock);
+    // overlayFocusHandler(focusBlock);
+    // focusClose.addEventListener('click', imgCloseHandler);
   }
 }
 
@@ -177,13 +158,49 @@ closeUserButton.addEventListener('click', () => {
   formToggleClass(popupUser); 
 });
 
-
-closeCardButton.addEventListener('click', () => {
-  formToggleClass(popupCard)
-}); 
 userForm.addEventListener('submit', formUserSubmitHandler); 
-addButton.addEventListener('click', formPlaceOpenHandler);
+addButton.addEventListener('click', () => {placePopup.open()});
 cardGrid.addEventListener('click', imgFocusHandler);
 cardGrid.addEventListener('click', cardLikeHandler);
-cardForm.addEventListener('submit', formCardSubmitHandler); 
+// cardForm.addEventListener('submit', formCardSubmitHandler); 
 cardGrid.addEventListener('click', cardDeleteHandler); 
+
+
+
+
+// function formCardSubmitHandler (evt) {
+//   evt.preventDefault();
+//   const placeInput = {
+//     name: cardForm.placeName.value,
+//     link: cardForm.link.value,
+//   }
+//   const card = new Card(placeInput, cardTemplate);
+//   card.makeCard();
+  
+//   formToggleClass(popupCard);
+// }
+
+
+
+// const cardList = new Section({
+//   items: initialCards,
+//   renderer: (item) => {
+//     const card = new Card(item, cardTemplate);
+//     const newCard = card.makeCard();
+//     cardList.addItem(newCard)
+//   }
+// },
+// gridSection,
+// )
+
+// cardList.generateCards();
+
+
+
+// function formPlaceOpenHandler () {
+//   formToggleClass(popupCard);
+//   escHandler(popupCard);
+//   overlayFormHandler(popupCard);
+//   cardForm.placeName.value = '';
+//   cardForm.link.value = '';
+// }
