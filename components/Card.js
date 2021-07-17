@@ -18,14 +18,5 @@ export default class Card {
       this.newCard.querySelector('.card__img').src = this._link;
       this.newCard.querySelector('.card__place').textContent = this._name;
       return this.newCard;
-
-      // const popupCard = document.querySelector('.popup-card');
-      // const cardGrid = document.querySelector('.card-grid');
-      // if(popupCard.classList.contains('popup_closed')){
-        // cardGrid.append(this.newCard);
-      // } else {
-      //   cardGrid.prepend(this.newCard);
-      // };
   }
-
 }

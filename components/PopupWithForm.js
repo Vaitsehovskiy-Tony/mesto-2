@@ -1,30 +1,31 @@
-    import Popup from './Popup.js';
-
+import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
     constructor({popupSelector, callback}) {
         super({popupSelector});
         this._callback = callback;
+        this._inputs = this._popupSelector.querySelectorAll('.popup__field');
     }
     
     _getInputValues() {
-         const _inputArr = this._popupSelector.querySelectorAll('.popup__field');
-         console.log(_inputArr[0].value);
-        this._firstField = _inputArr[0].value;
-        this._secondField = _inputArr[1].value;
         return {
-            name: this._firstField,
-            link: this._secondField
+            name: this._inputs[0].value,
+            link: this._inputs[1].value
         };
     }
 
     _setEventListeners() {   
         super._setEventListeners();
-        this._popupSelector.querySelector('.info-edit__submit').addEventListener('click', () => {this._callback()})
+        this._popupSelector.querySelector('.info-edit__submit').addEventListener('click', (evt) => {
+            evt.preventDefault();
+            this._callback(this._getInputValues());
+            this.close();
+            evt.stopImmediatePropagation();
+        });
     }
 
     _clearInputValues() {
-        this._popupSelector.querySelectorAll('.popup__field').forEach(input => input.value = '');
+        this._inputs.forEach(input => input.value = '');
     }
 
     close() {
@@ -35,5 +36,10 @@ export default class PopupWithForm extends Popup {
     open(){
         super.open();
         this._setEventListeners();
+    }
+
+    setInputValues(userData) {
+        this._inputs[0].value = userData.userName;
+        this._inputs[1].value = userData.userJob;
     }
 }

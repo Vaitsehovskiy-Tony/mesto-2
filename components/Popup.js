@@ -26,7 +26,7 @@ export default class Popup {
 
     _overlayFormHandler() {
         this._popupSelector.addEventListener('click', (evt) => {
-            if (evt.target !== document.querySelector('.focus__img')) {
+            if (evt.target.classList.contains('overlay')) {
                 this._popupSelector.classList.add('popup_closed');
             } 
           })
@@ -34,12 +34,12 @@ export default class Popup {
     
 
     _setEventListeners(){
-        // const _closeButton = 
-        console.log('раз');
-        this._popupSelector.querySelector('.close-button').addEventListener('click', () => {
+        this._popupSelector.querySelector('.close-button')
+        .addEventListener('click', () => {
             this.close();
         }); 
         this._handleEscClose();
+        this._overlayFormHandler();
 
     }
 }
