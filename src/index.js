@@ -1,8 +1,9 @@
-import Card from '../components/Card.js';
-import Section from '../components/Section.js';
-import PopupWithForm from '../components/PopupWithForm.js';
+import './styles/style.css'; 
+import Card from './components/Card.js';
+import Section from './components/Section.js';
+import PopupWithForm from './components/PopupWithForm.js';
 
-import {initialCards, editButton, addButton, cardGrid, cardTemplate, gridSection, userInfo, formValidatorUser, formValidatorCard, imgFocusHandler} from '../utils/constants.js';
+import {initialCards, editButton, addButton, cardGrid, cardTemplate, gridSection, userInfo, formValidatorUser, formValidatorCard, imgFocusHandler} from './utils/constants.js';
 
 const cardList = new Section({
     items: initialCards,
