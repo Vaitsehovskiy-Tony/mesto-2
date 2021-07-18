@@ -2,8 +2,15 @@ import './styles/style.css';
 import Card from './components/Card.js';
 import Section from './components/Section.js';
 import PopupWithForm from './components/PopupWithForm.js';
+import FormValidator from './components/FormValidator.js';
+import UserInfo from './components/UserInfo.js';
 
-import {initialCards, editButton, addButton, cardGrid, cardTemplate, gridSection, userInfo, formValidatorUser, formValidatorCard, imgFocusHandler} from './utils/constants.js';
+import {initialCards, editButton, addButton, cardGrid, cardTemplate, gridSection, imgFocusHandler, popupUser, popupCard, formSelectors, nameSelector, jobSelector} from './utils/constants.js';
+
+const formValidatorUser = new FormValidator(popupUser, formSelectors);
+const formValidatorCard = new FormValidator(popupCard, formSelectors);
+const userInfo = new UserInfo(nameSelector, jobSelector);
+
 
 const cardList = new Section({
     items: initialCards,

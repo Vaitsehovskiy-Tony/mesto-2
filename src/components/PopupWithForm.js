@@ -17,11 +17,15 @@ export default class PopupWithForm extends Popup {
     _setEventListeners() {   
         super._setEventListeners();
         this._popupSelector.querySelector('.info-edit__submit').addEventListener('click', (evt) => {
-            evt.preventDefault();
             this._callback(this._getInputValues());
             this.close();
             evt.stopImmediatePropagation();
         });
+    }
+
+    _handleSubmitListener() {
+        this._callback(this._getInputValues());
+        this.close();
     }
 
     _clearInputValues() {
@@ -34,6 +38,7 @@ export default class PopupWithForm extends Popup {
     }
 
     open(){
+        this._clearInputValues();
         super.open();
         this._setEventListeners();
     }

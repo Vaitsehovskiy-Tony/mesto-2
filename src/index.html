@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" sizes="16x16"
-    href="./images/favicon2.ico">
+    href="<%= require('./images/favicon2.ico').default %>">
     <link rel="stylesheet" href="./styles/style.css">
 
     <title>New Mesto</title>
@@ -13,27 +13,30 @@
     <div class="root">
         <div class="wrapper">
             <header class="header">
-                <img src="./images/Vector.svg" alt="logo" class="header__logo">
+                <img alt="logo" class="header__logo" src="<%= require('./images/Vector.svg').default %>">
                 <hr class="header__underline">
             </header>
             <main class="main">
                 <section class="profile">
                     <div class="info">
-                        <img src="./images/image.jpg" alt="avatar" class="info__avatar">
+                        <!-- <img class="info__avatar" alt='info__avatar' src="<%= require('./images/image.jpg').default %>"> -->
+                        <!-- Так такая ссылка всё-таки читается??? Проверить на всех остальных img.src в файле -->
+                        <img class="info__avatar" alt='info__avatar' src='./images/image.jpg'>
+
                         <h2 class="info__name">Жак-Ив Кусто</h2>
-                        <img src="./images/Edit Button.svg" alt="edit-button" class="info__edit-button">
+                        <img alt="edit-button" class="info__edit-button" src="<%= require('./images/Edit Button.svg').default %>">
                         <h3 class="info__job">Исследователь океана</h3>
-                        <img src="./images/Add Button.svg" alt="add-button" class="add-button">
+                        <img alt="add-button" class="add-button" src="<%= require('./images/Add Button.svg').default %>">
                     </div>
                 </section>
                 <section class="card-grid">
                     <template id="cardTemplate">
                         <div class="card">
                             <img alt="pic" class="card__img">
-                            <img src="./images/bin-icon.svg" alt="" class="card__bin-icon">
+                            <img  alt="" class="card__bin-icon" src="<%= require('./images/bin-icon.svg').default %>">
                             <div class="card__info">
                                 <h4 class="card__place"></h4>
-                                <img src="./images/like-icon.svg" alt="like-icon" class="card__like-icon">
+                                <img alt="like-icon" class="card__like-icon" src="<%= require('./images/like-icon.svg').default %>">
                             </div>
                         </div>
                     </template>
@@ -46,7 +49,7 @@
     </div>
     <section class="popup popup-user popup_closed overlay">
         <div class="popup__container">
-            <button type="button" class="popup__close-button close-button"><img src="./images/Close Icon.svg" alt="" class="popup__close-button-img">
+            <button type="button" class="popup__close-button close-button"><img alt="" class="popup__close-button-img" src="<%= require('./images/Close Icon.svg').default %>">
             </button>
             <form action="" class="info-edit" name="userData">        
                 <h3 class="info-edit__header">Редактировать профиль</h3>
@@ -60,7 +63,7 @@
     </section>
     <section class="popup popup-card popup_closed overlay">
         <div class="popup__container">
-            <button type="button" class="popup__close-button close-button"><img src="./images/Close Icon.svg" alt="" class="popup__close-button-img">
+            <button type="button" class="popup__close-button close-button"><img src="<%= require('./images/Close Icon.svg').default %>" alt="" class="popup__close-button-img">
             </button>
             <form action="" class="info-edit" name="newCard">        
                 <h3 class="info-edit__header">Новое место</h3>
@@ -74,7 +77,7 @@
     </section>
     <section class="focus popup_closed">
         <div class="focus__container overlay">
-            <buttton class="focus__close-bttn close-button"><img src="./images/Close Icon.svg" alt="" class="popup__close-button-img"></buttton>
+            <buttton class="focus__close-bttn close-button"><img src="<%= require('./images/Close Icon.svg').default %>" alt="" class="popup__close-button-img"></buttton>
             <img src="" alt="" class="focus__img">
             <h4 class="focus__info overlay">З</h4>
         </div>

@@ -26,30 +26,16 @@ module.exports = {
         use: 'babel-loader',
         exclude: '/node_modules/'
       },
-          //       {
-          //   test: /\.(png|svg|jpg|gif|woff2|woff)$/,
-          //   loader: 'file-loader'
-          // },
       {
-        test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf|ico)$/,
-        type: 'asset/resource',
+        test: /\.(jpe?g|png|gif|svg|ico)$/i,
+        use: [{
+            loader: 'file-loader',
+            options: {
+                name: '[name].[ext]',
+                outputPath: 'images/'
+            }
+        }]
       },
-      
-      // {
-      //   test: /\.(png|jpg|gif|ico|svg)$/,
-      //   use: [
-      //     {
-
-      //       // чтобы картинки грузились можно так, либо добавить .default в html
-      //       loader: 'file-loader',
-      //       options: {
-      //         name: './images/[name].[ext]',
-      //         esModule: false
-      //       },
-      //     },
-      //   ]
-      // },
-
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, {

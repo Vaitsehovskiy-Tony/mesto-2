@@ -1,7 +1,4 @@
-import FormValidator from '../components/FormValidator.js';
-import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
-
 
 const initialCards = [
     {
@@ -50,14 +47,10 @@ const formSelectors = {
 
 const focusElement = new PopupWithImage({popupSelector:'.focus'});
 
+
 const imgFocusHandler = (evt) => {
   if (evt.target.classList.contains('card__img')) {
     focusElement.open(evt);
   }
 }
-
-const formValidatorUser = new FormValidator(popupUser, formSelectors);
-const formValidatorCard = new FormValidator(popupCard, formSelectors);
-const userInfo = new UserInfo(nameSelector, jobSelector);
-
-  export {initialCards, editButton, addButton, cardGrid, cardTemplate, gridSection, userInfo, formValidatorUser, formValidatorCard, imgFocusHandler};
+  export {initialCards, editButton, addButton, cardGrid, cardTemplate, gridSection, imgFocusHandler, popupUser, popupCard, formSelectors, nameSelector, jobSelector};
