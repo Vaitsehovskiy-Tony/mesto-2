@@ -8,18 +8,19 @@ export default class PopupWithForm extends Popup {
     }
     
     _getInputValues() {
-        return {
-            name: this._inputs[0].value,
-            link: this._inputs[1].value
-        };
+        this._newInputs = [];
+        this._inputs.forEach(i => this._newInputs.push(i.value));
+        return this._newInputs;
     }
 
     _setEventListeners() {   
         super._setEventListeners();
         this._popupSelector.querySelector('.info-edit__submit').addEventListener('click', (evt) => {
-            this._callback(this._getInputValues());
-            console.log(this._getInputValues());
-            this.close();
+            this._popupSelector.querySelector('.info-edit__submit').textContent = 'Сохраняю...';
+            setTimeout(() =>{
+                this._callback(this._getInputValues());
+                this.close();
+            }, 200);
             evt.stopImmediatePropagation();
         });
     }
@@ -34,6 +35,7 @@ export default class PopupWithForm extends Popup {
     }
 
     open(){
+        this._popupSelector.querySelector('.info-edit__submit').textContent = 'Сохранить';
         super.open();
         this._setEventListeners();
     }
@@ -42,4 +44,15 @@ export default class PopupWithForm extends Popup {
         this._inputs[0].value = userData.userName;
         this._inputs[1].value = userData.userJob;
     }
+    
+    openBeforeRemove(evt){
+        this._event = evt;
+        super.open();
+        this._popupSelector.querySelector('.info-edit__submit').addEventListener('click', (evt) => {
+            evt.preventDefault();
+            this._event.target.parentNode.remove();
+            this.close();
+        });
+    }
+
 }

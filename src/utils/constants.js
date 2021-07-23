@@ -30,6 +30,7 @@ const initialCards = [
 const popupUser = document.querySelector('.popup-user');
 const popupCard = document.querySelector('.popup-card');
 const popupAvatar = document.querySelector('.popup__avatar');
+const avatarUpdater = document.querySelector('.info__avatar-container');
 const nameSelector = '.info__name';
 const jobSelector = '.info__job'  ;
 const avatarSelector = '.info__avatar';
@@ -62,4 +63,4 @@ const imgFocusHandler = (evt) => {
     focusElement.open(evt);
   }
 }
-  export {initialCards, editButton, addButton, cardGrid, cardTemplate, gridSection, imgFocusHandler, popupUser, popupCard, formSelectors, nameSelector, jobSelector, apiData, avatarSelector, popupAvatar};
+  export {initialCards, editButton, addButton, cardGrid, cardTemplate, gridSection, imgFocusHandler, popupUser, popupCard, formSelectors, nameSelector, jobSelector, apiData, avatarSelector, popupAvatar, avatarUpdater};

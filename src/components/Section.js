@@ -1,8 +1,9 @@
 export default class Section {
-    constructor({items, renderer}, containerSelector) {
+    constructor({items, renderer, removeCallback}, containerSelector) {
         this._items = items;
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);;
+        this._removeCallback = removeCallback;
     }
 
     generateCards() {
@@ -16,13 +17,14 @@ export default class Section {
         this._container.prepend(
             this._renderer(item)
         );
+
     }
 
     _cardDeleteHandler(listnerToSet) {
         listnerToSet.addEventListener('click', (evt) => {
           if(evt.target.classList.contains('card__bin-icon')){
-            evt.target.parentNode.remove();
-            }
+            this._removeCallback(evt);
+          }
         });
     }
     
