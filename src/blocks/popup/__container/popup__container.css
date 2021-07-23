@@ -17,3 +17,11 @@
         margin: auto 19px;
     }
 }
+
+.popup__container.popup__delete-card-container {
+    max-height: 181px;
+}
+
+.popup__container.popup__edit-avatar {
+    max-height: 272px;
+}

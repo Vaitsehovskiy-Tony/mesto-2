@@ -1,0 +1,17 @@
+.info__avatar-container {
+    grid-area: avatar;
+    position: relative;
+    z-index: 2;
+    border-radius: 50%;
+}
+
+.info__avatar-container:hover{
+    background: rgba(0,0,0,0.8);
+    transition-duration: 0.5s;
+
+    
+}
+.info__avatar-container:hover .info__avatar-edit-pic {
+    opacity: 1;
+    transition: opacity 0.7s;
+}

@@ -26,3 +26,8 @@
     opacity: 0.7;
     border: none;
 }
+
+
+.popup__edit-avatar .popup__field {
+    margin-top: 50px;
+}

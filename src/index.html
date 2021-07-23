@@ -22,7 +22,9 @@
                         <!-- <img class="info__avatar" alt='info__avatar' src="<%= require('./images/image.jpg').default %>"> -->
                         <!-- Так такая ссылка всё-таки читается??? Проверить на всех остальных img.src в файле -->
                         <img class="info__avatar" alt='info__avatar' src='./images/image.jpg'>
-
+                        <div class="info__avatar-container">
+                            <img class="info__avatar-edit-pic" alt='info__avatar' src="<%= require('./images/avatar_edit.svg').default %>">
+                        </div>
                         <h2 class="info__name">Жак-Ив Кусто</h2>
                         <img alt="edit-button" class="info__edit-button" src="<%= require('./images/Edit Button.svg').default %>">
                         <h3 class="info__job">Исследователь океана</h3>
@@ -36,7 +38,11 @@
                             <img  alt="" class="card__bin-icon" src="<%= require('./images/bin-icon.svg').default %>">
                             <div class="card__info">
                                 <h4 class="card__place"></h4>
-                                <img alt="like-icon" class="card__like-icon" src="<%= require('./images/like-icon.svg').default %>">
+                                <div class="card__like-container">
+                                    <img alt="like-icon" class="card__like-icon" src="<%= require('./images/like-icon.svg').default %>">
+                                    <!-- <img alt="like-icon" class="card__like-icon_hidden" src="<%= require('./images/like-is-liked.svg').default %>"> -->
+                                    <span class="card__like-counter">1</span>
+                                </div>
                             </div>
                         </div>
                     </template>
@@ -72,6 +78,26 @@
                 <input type="url" name='link' placeholder="Ссылка на картинку" id='link' class="popup__field info-edit__job"  novalidate required>
                 <span class="popup__field-error link-error">непредвиденная ошибка!!!</span>
                 <button type="submit" class="info-edit__submit">Сохранить</button>
+            </form>
+        </div>
+    </section>
+    <section class="popup popup_closed overlay">
+        <div class="popup__container popup__delete-card-container">
+            <button class="popup__close-button close-button"><img src="<%= require('./images/Close Icon.svg').default %>" alt="" class="popup__close-button-img"></button>
+            <form action="" class="info-edit" name='deleteCard'>
+                <h3 class="info-edit__header">Вы уверены?</h3>
+                <button type="submit" class="info-edit__submit info-edit__submit_enabled">Да</button>
+            </form>
+        </div>
+    </section>
+    <section class="popup_closed popup overlay popup__avatar">
+        <div class="popup__container popup__edit-avatar">
+            <button class="popup__close-button close-button"><img src="" alt="" class="popup__close-button-img"></button>
+            <form action="" class="info-edit">
+                <h3 class="info-edit__header">Обновить аватар</h3>
+                <input type="url" name='link' placeholder="Ссылка на аватар" id='link' class="popup__field info-edit__job"  novalidate required>
+                <span class="popup__field-error link-error">непредвиденная ошибка!!!</span>
+                <button class="info-edit__submit">Сохранить</button>
             </form>
         </div>
     </section>

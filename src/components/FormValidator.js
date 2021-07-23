@@ -36,13 +36,13 @@ export default class FormValidator {
   }
   
   _openInputError(input){
-    const errSpan = document.querySelector(`.${input.id}-error`);
+    const errSpan = this._popupSelector.querySelector(`.${input.id}-error`);
     errSpan.textContent = input.validationMessage;
     errSpan.classList.add(this._errorEnabled);
   }
   
   _hideInputError(input){
-    const errSpan = document.querySelector(`.${input.id}-error`);
+    const errSpan = this._popupSelector.querySelector(`.${input.id}-error`);
     errSpan.textContent = '';
     errSpan.classList.remove(this._errorEnabled);
   }

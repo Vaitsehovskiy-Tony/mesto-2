@@ -36,7 +36,7 @@ export default class Section {
 
     _cardLikeToggler(evt) {
         if(!evt.target.classList.contains('is-liked')){
-            evt.target.src = "./images/like-is-liked.svg" ;
+            evt.target.src = './images/like-is-liked.svg' ;
             evt.target.classList.add('is-liked');
         } else {
             evt.target.src = "./images/like-icon.svg" ;
