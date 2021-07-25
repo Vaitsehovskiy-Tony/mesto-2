@@ -48,8 +48,11 @@ export default class PopupWithForm extends Popup {
     openBeforeRemove(evt){
         this._event = evt;
         super.open();
+        super._setEventListeners();
         this._popupSelector.querySelector('.info-edit__submit').addEventListener('click', (evt) => {
             evt.preventDefault();
+            console.log(this._event.target.parentNode);
+            this._callback(this._event.target.parentNode.querySelector('.card__bin-icon').id);
             this._event.target.parentNode.remove();
             this.close();
         });

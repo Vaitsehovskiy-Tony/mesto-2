@@ -32,6 +32,9 @@
                     </div>
                 </section>
                 <section class="card-grid">
+                    <section class="preloader">
+                        <i class="preloader__item"></i>
+                    </section>
                     <template id="cardTemplate">
                         <div class="card">
                             <img alt="pic" class="card__img">
@@ -40,8 +43,8 @@
                                 <h4 class="card__place"></h4>
                                 <div class="card__like-container">
                                     <img alt="like-icon" class="card__like-icon" src="<%= require('./images/like-icon.svg').default %>">
-                                    <!-- <img alt="like-icon" class="card__like-icon_hidden" src="<%= require('./images/like-is-liked.svg').default %>"> -->
-                                    <span class="card__like-counter">1</span>
+                                    <img alt="like-icon" class="card__like-icon_hidden" src="<%= require('./images/like-is-liked.svg').default %>">
+                                    <span class="card__like-counter"></span>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +52,7 @@
                 </section>
             </main>
             <footer class="footer">
-                <h4 class="footer__copyright">© 2020 Mesto Russia</h4>
+                <h4 class="footer__copyright">© 2021 Mesto Russia</h4>
             </footer>
         </div>
     </div>
@@ -58,7 +61,7 @@
             <button type="button" class="popup__close-button close-button"><img alt="" class="popup__close-button-img" src="<%= require('./images/Close Icon.svg').default %>">
             </button>
             <form action="" class="info-edit" name="userData">        
-                <h3 class="info-edit__header">Редактировать профиль</h3>
+                <h3 class="info-edit__header">Редактировать  профиль</h3>
                 <input type="text" name='name' placeholder="" id='name' class="popup__field info-edit__name "  minlength="2" maxlength="40" novalidate required>
                 <span class="popup__field-error name-error">непредвиденная ошибка!!!</span>
                 <input type="text" name='job' placeholder="" id='job' class="popup__field info-edit__job"  minlength="2" maxlength="200" novalidate required>

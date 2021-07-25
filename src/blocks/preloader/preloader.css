@@ -1,0 +1,26 @@
+@import url(./__item.css/preloader__item.css);
+
+.preloader {
+    position: relative;
+    margin: 0 auto;
+    grid-column: 1 / span 3;
+    display: block;
+}
+
+@media screen and (max-width: 936px) {
+    .preloader {
+        position: relative;
+        margin: 0 auto;
+        grid-column: 1 / span 2;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 598px) {
+    .preloader {
+        position: relative;
+        margin: 0 auto;
+        grid-column: 1 / span 1;
+        display: block;
+    }
+}

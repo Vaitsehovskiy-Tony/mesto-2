@@ -15,7 +15,13 @@ export default class UserInfo {
         this._jobSelector.textContent = input.link;
     }
 
-    updateUserAvatar(link) {
+    updateUserAvatar(link, _id) {
         this._avatarSelector.src = link;
+        this._avatarSelector.id = _id;
+        console.log(this._avatarSelector.id);
+    }
+
+    getUserId(){
+        return this._avatarSelector.id;
     }
 }

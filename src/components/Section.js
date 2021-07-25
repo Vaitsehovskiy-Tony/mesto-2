@@ -4,6 +4,8 @@ export default class Section {
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);;
         this._removeCallback = removeCallback;
+        this._likeCallback = likeCallback;
+        this._removeLikeCallback = removeLikeCallback;
     }
 
     generateCards() {
@@ -18,6 +20,10 @@ export default class Section {
             this._renderer(item)
         );
 
+    }
+
+    _cardLikeCounter(amount) {
+        this._likes = amount.likes.length;
     }
 
     _cardDeleteHandler(listnerToSet) {
@@ -40,9 +46,11 @@ export default class Section {
         if(!evt.target.classList.contains('is-liked')){
             evt.target.src = './images/like-is-liked.svg' ;
             evt.target.classList.add('is-liked');
+            // this._likeCallback(this._cardId);
         } else {
             evt.target.src = "./images/like-icon.svg" ;
             evt.target.classList.remove('is-liked');
+            // this._removeLikeCallback(this._cardId);
         }
     }
 

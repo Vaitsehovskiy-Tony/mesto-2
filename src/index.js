@@ -5,70 +5,106 @@ import PopupWithForm from './components/PopupWithForm.js';
 import FormValidator from './components/FormValidator.js';
 import UserInfo from './components/UserInfo.js';
 import Api from './components/Api.js';
+import {config} from './utils/config.js';
 
-import {initialCards, editButton, addButton, cardGrid, cardTemplate, gridSection, imgFocusHandler, popupUser, popupCard, formSelectors, nameSelector, jobSelector, apiData, avatarSelector, popupAvatar, avatarUpdater} from './utils/constants.js';
+import {editButton, addButton, cardGrid, cardTemplate, gridSection, imgFocusHandler, popupUser, popupCard, formSelectors, nameSelector, jobSelector, apiData, avatarSelector, popupAvatar, avatarUpdater} from './utils/constants.js';
+
+// решить баг - вместо страницы черный экран в ~20% случаев
+
+// document.querySelector('.preloader').style.display = 'block';
 
 const formValidatorUser = new FormValidator(popupUser, formSelectors);
 const formValidatorCard = new FormValidator(popupCard, formSelectors);
 const formValidatorAvatar = new FormValidator(popupAvatar, formSelectors);
 const userInfo = new UserInfo(nameSelector, jobSelector, avatarSelector);
-const api = new Api({apiData}); 
+const api = new Api({config}); 
 const apiCards = [];
 
-// api.getInitialCards()
-//   .then(res => res.forEach(item => {
-//     cardList.addItem(item);
-//   }))
+
+
+api.getInitialCards()
+  .then(res => {
+    console.log(res);
+    res.forEach(item => {
+      cardList.addItem(item);
+    })
+  })
+
+api.getUserInfo()
+  .then(res => {
+    userInfo.setUserInfo({
+      name: res.name,
+      link: res.about
+    });
+    userInfo.updateUserAvatar(res.avatar, res._id);
+  });   
 
 const cardList = new Section({
-    items: initialCards,
+    items: apiCards,
     renderer: (item) => {
       const card = new Card(item, cardTemplate);
-      return card.makeCard( );
-    },
+      return card.makeCard(userInfo.getUserId());
+    },  
     removeCallback:(evt)=> {
       removePopup.openBeforeRemove(evt);
-    }
+    },
   },
   gridSection,
 )
 
-// удалить это примерно скоро >>
-userInfo.updateUserAvatar('https://i.pinimg.com/originals/9c/77/46/9c7746225873e02d83b9315501b8dd2f.jpg');
-
 cardList.generateCards();
-
+// cardList.addEventListener('load', () => {
+//   document.querySelector('.preloader').style.display = 'none';
+// });
 
 const placePopup = new PopupWithForm({
   popupSelector:'.popup-card',
   callback: (item) => {
-    cardList.addItem({
-      name: item[0],
-      link: item[1]
-    });
+    api.createCard(item)
+      .then(res => {
+        cardList.addItem(res);
+      })
   }
 });
 
 const userPopup = new PopupWithForm({
   popupSelector:'.popup-user',
   callback: (input) => {
-    userInfo.setUserInfo({
+    api.updateUserInfo({
       name: input[0],
       link: input[1]
-    });;
+    })
+
+    api.getUserInfo()
+    .then(res => {
+      userInfo.setUserInfo({
+        name: res.name,
+        link: res.about
+        });
+    });  
+
   }
 });
 
 const avatarPopup = new PopupWithForm({
   popupSelector: '.popup__avatar',
   callback: (input) => {
-    userInfo.updateUserAvatar(input[0]);
+    
+    api.updateUserAvatar({
+      avatar: input[0]
+    })
+
+    api.getUserInfo()
+    .then(res => {
+      userInfo.updateUserAvatar(res.avatar);
+    });  
   }
 })
 
 const removePopup = new PopupWithForm({
   popupSelector: '.popup__delete',
-  callback: () => {
+  callback: (cardId) => {
+    api.deleteCard(cardId);
   }
 })
 
@@ -93,4 +129,43 @@ addButton.addEventListener('click', () => {
   placePopup.open();
 });
 
+
+const load = () => {
+  window.onload = function() {
+    document.querySelector('.preloader').style.display = 'none';
+  };
+}
+
+
 cardGrid.addEventListener('click', imgFocusHandler);
+
+
+setTimeout(() =>{
+  load();
+}, 200);
+
+
+
+// 1. Прикрутить прелоадер - window.onload из интекса не срабатывает.Api
+// 2. Когда в index.html требуется require у картинок
+// 3. Кнопка "Сохранение" в placePopup чтобы работала во время сохранения.
+// 3.5 В 5-10% случаев запуска приложения появляется черный экран, который убирается только рефрешем.
+
+
+// 4. Рабочий removeEventListener ->
+// При закрытии попапа необходимо корректно удалять обработчик с document. Для удаления обработчика события, необходимо использовать removeEventListener, также нужно передать ту же функцию, которую передавали при создании обработчика события.  Чтобы его удалить нужно не использовать стрелочные функции в качестве обработчиков, а использовать методы класса привязав их к контексту класса с помощью bind, для того, чтобы не потерять контекст
+// https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
+// https://learn.javascript.ru/introduction-browser-events
+
+// ->>>
+
+// close() { 
+//   this._popupSelector.classList.remove('popup_opened'); 
+//   document.removeEventListener('keydown', this._handleEscClose.bind(this)); 
+// } 
+
+// _handleEscClose(evt) { 
+//   if (document.querySelector('.popup_opened') !== null && evt.code === 'Escape') { 
+//       this.close(); 
+//   } 
+// } 

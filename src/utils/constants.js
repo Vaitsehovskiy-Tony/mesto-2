@@ -1,31 +1,5 @@
 import PopupWithImage from '../components/PopupWithImage.js';
 
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
 
 const popupUser = document.querySelector('.popup-user');
 const popupCard = document.querySelector('.popup-card');
@@ -48,13 +22,6 @@ const formSelectors = {
   submitButton: '.info-edit__submit',
 }
 
-const apiData = {
-  userAvatar:'http://nomoreparties.co/cohort7/users/me/avatar',
-  userLink: 'http://nomoreparties.co/cohort7/users/me',
-  cardLink: 'http://nomoreparties.co/cohort7/cards',
-  authCode: '18709e85-c197-4083-8e6e-7400479c7833'
-}
-
 const focusElement = new PopupWithImage({popupSelector:'.focus'});
 
 
@@ -63,4 +30,4 @@ const imgFocusHandler = (evt) => {
     focusElement.open(evt);
   }
 }
-  export {initialCards, editButton, addButton, cardGrid, cardTemplate, gridSection, imgFocusHandler, popupUser, popupCard, formSelectors, nameSelector, jobSelector, apiData, avatarSelector, popupAvatar, avatarUpdater};
+  export {editButton, addButton, cardGrid, cardTemplate, gridSection, imgFocusHandler, popupUser, popupCard, formSelectors, nameSelector, jobSelector, avatarSelector, popupAvatar, avatarUpdater};
