@@ -11,109 +11,53 @@ export default class Api {
   }
   
 
+
   getUserInfo() {
-    return fetch(this._baseUrl + this._usersLink + this._userLink, {
-      method: 'GET',
-      headers: this._headers,
-    })
-    .then(this._handleResult)
-    .catch(this._handleError)
+    return this._request(this._usersLink + this._userLink, 'GET');
   }
 
   getInitialCards() {
-    return fetch(this._baseUrl + this._cardLink, 
-    {
-      method: 'GET',
-      headers: this._headers,
-    })
-    .then(this._handleResult)
-    .catch(this._handleError)
-  } 
-
-  updateUserInfo(info) {
-    fetch(this._baseUrl + this._usersLink + this._userLink, 
-      {
-        method: 'PATCH',
-        headers: this._headers,
-        body: JSON.stringify({
-          name: info.name,
-          about: info.link
-        })
-      })
-    .then(this._handleResult)
-    .catch(this._handleError)
+    return this._request(this._cardLink, 'GET');
   }
 
-  
+  updateUserInfo(info) {
+    return this._request(this._usersLink + this._userLink, 'PATCH', {
+      name: info.name,
+      about: info.link
+    });
+  }
+
   updateUserAvatar(info) {
-    fetch(this._baseUrl + this._usersLink + this._userLink + this._avatarLink, 
-      {
-        method: 'PATCH',
-        headers: this._headers,
-        body: JSON.stringify({
-          avatar: info.avatar
-        })
-      })
-    .then(this._handleResult)
-    .catch(this._handleError)
+    return this._request(this._usersLink + this._userLink + this._avatarLink, 'PATCH', {
+      avatar: info.avatar
+    });
   }
 
   createCard(item) {
-    return fetch(this._baseUrl + this._cardLink, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: item[0],
-        link: item[1]
-      })
-    })
-    .then(this._handleResult)
-    .catch(this._handleError)
+    return this._request(this._cardLink, 'POST', {
+      name: item[0],
+      link: item[1]
+    });
   }
 
   deleteCard(cardId) {
-    fetch(this._baseUrl + this._cardLink + cardId, {
-      method: 'DELETE',
-      headers: this._headers,
-    })
-    .then(this._handleResult)
-    .catch(this._handleError)
+    return this._request(this._cardLink + cardId, 'DELETE');
+  }
+  
+  setLike(_cardID) {
+    return this._request(this._cardLink + this._likesLink + _cardID, 'GET');
   }
 
-  getLikesInfo(_cardID) {
-    return fetch(this._baseUrl + this._cardLink + this._likesLink + _cardID , {
-      method: 'GET',
-      headers: this._headers,
-    })
-    .then(this._handleResult)
-    .catch(this._handleError)
-  }
-
-  // setLike(_cardID) {
-  //   fetch (this._baseUrl + this._cardLink + this._likesLink + _cardID, {
-  //     method: 'PUT',
-  //     headers: this._headers,
-  //   })
-  //   .then(this._handleResult)
-  //   .catch(this._handleError)
-  // }
-
-  // removeLike(_cardID) {
-  //   fetch (this._baseUrl + this._cardLink + this._likesLink + _cardID, {
-  //     method: 'DELETE',
-  //     headers: this._headers,
-  //   })
-  //   .then(this._handleResult)
-  //   .catch(this._handleError)
-  // }
-
-
-  _handleResult(res){
-    if (res.ok) return res.json();
-  }
-
-  _handleError(err) {
-    return `Ошибка. Код ${err.code}. ${err}`;
+  async _request(url, method, toString) {
+    try {
+      const res = await fetch(this._baseUrl + url, {
+        method,
+        headers: this._headers,
+        body: toString ? JSON.stringify(toString) : undefined
+      });
+      if (res.ok) return res.json();
+    } catch (e) 
+    {`error: ${e}`}
   }
 
 }

@@ -1,5 +1,5 @@
 export const config = {
-    baseUrl: 'http://nomoreparties.co/cohort7/',
+    baseUrl: 'https://nomoreparties.co/cohort7/',
     avatarLink:'avatar/',
     userLink: 'me/',
     cardLink: 'cards/',

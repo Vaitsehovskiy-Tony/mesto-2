@@ -18,7 +18,6 @@ export default class UserInfo {
     updateUserAvatar(link, _id) {
         this._avatarSelector.src = link;
         this._avatarSelector.id = _id;
-        console.log(this._avatarSelector.id);
     }
 
     getUserId(){

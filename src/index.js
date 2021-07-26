@@ -9,9 +9,6 @@ import {config} from './utils/config.js';
 
 import {editButton, addButton, cardGrid, cardTemplate, gridSection, imgFocusHandler, popupUser, popupCard, formSelectors, nameSelector, jobSelector, apiData, avatarSelector, popupAvatar, avatarUpdater} from './utils/constants.js';
 
-// решить баг - вместо страницы черный экран в ~20% случаев
-
-// document.querySelector('.preloader').style.display = 'block';
 
 const formValidatorUser = new FormValidator(popupUser, formSelectors);
 const formValidatorCard = new FormValidator(popupCard, formSelectors);
@@ -20,24 +17,21 @@ const userInfo = new UserInfo(nameSelector, jobSelector, avatarSelector);
 const api = new Api({config}); 
 const apiCards = [];
 
-
-
-api.getInitialCards()
-  .then(res => {
-    console.log(res);
-    res.forEach(item => {
-      cardList.addItem(item);
-    })
+Promise.all([
+  api.getUserInfo(),
+  api.getInitialCards()
+])
+.then(([userData, cardItems]) => {
+  userInfo.setUserInfo({
+    name: userData.name,
+    link: userData.about
+  });
+  userInfo.updateUserAvatar(userData.avatar, userData._id);
+  cardItems.forEach(item => {
+    cardList.addItem(item);
   })
 
-api.getUserInfo()
-  .then(res => {
-    userInfo.setUserInfo({
-      name: res.name,
-      link: res.about
-    });
-    userInfo.updateUserAvatar(res.avatar, res._id);
-  });   
+});   
 
 const cardList = new Section({
     items: apiCards,
@@ -53,9 +47,7 @@ const cardList = new Section({
 )
 
 cardList.generateCards();
-// cardList.addEventListener('load', () => {
-//   document.querySelector('.preloader').style.display = 'none';
-// });
+
 
 const placePopup = new PopupWithForm({
   popupSelector:'.popup-card',
@@ -129,27 +121,15 @@ addButton.addEventListener('click', () => {
   placePopup.open();
 });
 
-
-const load = () => {
-  window.onload = function() {
-    document.querySelector('.preloader').style.display = 'none';
-  };
-}
-
-
 cardGrid.addEventListener('click', imgFocusHandler);
 
-
-setTimeout(() =>{
-  load();
-}, 200);
 
 
 
 // 1. Прикрутить прелоадер - window.onload из интекса не срабатывает.Api
 // 2. Когда в index.html требуется require у картинок
 // 3. Кнопка "Сохранение" в placePopup чтобы работала во время сохранения.
-// 3.5 В 5-10% случаев запуска приложения появляется черный экран, который убирается только рефрешем.
+// 4 В 5-10% случаев запуска приложения появляется черный экран, который убирается только рефрешем.
 
 
 // 4. Рабочий removeEventListener ->
@@ -169,3 +149,20 @@ setTimeout(() =>{
 //       this.close(); 
 //   } 
 // } 
+
+
+// cardList.addEventListener('load', () => {
+//   document.querySelector('.preloader').style.display = 'none';
+// });
+
+// const load = () => {
+//   window.onload = function() {
+//     document.querySelector('.preloader').style.display = 'none';
+//   };
+// }
+
+// setTimeout(() =>{
+//   load();
+// }, 200);
+
+// document.querySelector('.preloader').style.display = 'block';

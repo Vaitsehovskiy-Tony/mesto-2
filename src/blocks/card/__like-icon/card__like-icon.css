@@ -1,3 +1,5 @@
+@import url('./__like-icon_hidden/card__like-icon_hidden.css');
+
 .card__like-icon:hover {
     opacity: 0.5 ;
     transition-duration: 0.5s;
